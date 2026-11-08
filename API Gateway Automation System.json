@@ -1,0 +1,1106 @@
+{
+  "name": "API Gateway Automation System",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "automation-gateway",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -464,
+        480
+      ],
+      "id": "fe684767-387b-4e8c-a571-629b57d683b0",
+      "name": "Webhook",
+      "webhookId": "45daa434-9f46-4888-a5d1-07d548d42468"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8291c912-2e40-4094-b8c3-8b08528fd7b3",
+              "leftValue": "={{$json.body.requestType}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -16,
+        480
+      ],
+      "id": "d02b2313-4614-4758-af52-747ae75fd62f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.body.requestType}}",
+                    "rightValue": "email",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "19ff5307-1887-41aa-b30f-249ab8d6902d"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "334364e5-c4f5-4056-9a7d-39ed793c1c34",
+                    "leftValue": "={{$json.body.requestType}}",
+                    "rightValue": "data",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "74cd889b-cf22-4138-830c-8cb33f1ba043",
+                    "leftValue": "={{$json.body.requestType}}",
+                    "rightValue": "notification",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "allMatchingOutputs": false
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        176
+      ],
+      "id": "2f8a5d69-89c3-4008-998b-616e7b6bd434",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "DEH64UIY6OayVQHV",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/DEH64UIY6OayVQHV",
+          "cachedResultName": "GW - Email Handler"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestType": "={{ $json.body.requestType }}",
+            "name ": "={{ $json.body.name }}",
+            "email ": "={{ $json.body.email }}",
+            "message ": "={{ $json.body.message }}",
+            "request Id": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestType",
+              "displayName": "requestType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name ",
+              "displayName": "name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email ",
+              "displayName": "email ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "message ",
+              "displayName": "message ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "request Id",
+              "displayName": "request Id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        48
+      ],
+      "id": "2bd74cc6-63c9-44f7-ba35-fa288ed99146",
+      "name": "Call 'GW - Email Handler'",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "AvkoArUMYOHjIhrO",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/AvkoArUMYOHjIhrO",
+          "cachedResultName": "GW - Data Handler"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestType": "={{ $json.body.requestType }}",
+            "name": "={{ $json.body.name }}",
+            "email": "={{ $json.body.email }}",
+            "message": "={{ $json.body.message }}",
+            "requestId": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestType",
+              "displayName": "requestType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        432
+      ],
+      "id": "4ec2895e-ea8d-4b84-874e-e4f70401923f",
+      "name": "Call 'GW - Data Handler'",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "OfjDQEfBaO4AEJUk",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/OfjDQEfBaO4AEJUk",
+          "cachedResultName": "GW - Notification Handler"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestType": "={{ $json.body.requestType }}",
+            "name": "={{ $json.body.name }}",
+            "email": "={{ $json.body.email }}",
+            "message": "={{ $json.body.message }}",
+            "requestId": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestType",
+              "displayName": "requestType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        816
+      ],
+      "id": "39b3e9f7-047d-4c44-969c-4587c661228e",
+      "name": "Call 'GW - Notification Handler'",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cba87976-c2fc-41c1-9b00-33dfe001b9eb",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "id": "deec86dd-fc40-4e97-a809-41b3a17ddaf4",
+              "name": "message",
+              "value": "requestType is required",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        656,
+        1024
+      ],
+      "id": "f5df8f15-b631-4867-bc43-aa50f5769095",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        656,
+        -192
+      ],
+      "id": "4d569c47-1c49-4778-b92b-00276701fa10",
+      "name": "Sub workflow Merge"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        880,
+        -256
+      ],
+      "id": "f3988aa6-2a16-4fdb-ab6f-8247a17baa4b",
+      "name": "Request Type validation"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "32f315f5-89bb-43f0-ae01-515f93d19aba",
+              "leftValue": "={{ $json.headers[\"x-api-key\"] }}",
+              "rightValue": "my-secret-api-key-123",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1104,
+        -256
+      ],
+      "id": "408d7821-bb6f-4972-b0a8-b8fab083dc41",
+      "name": "IF API Key"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 401
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1328,
+        -256
+      ],
+      "id": "b730e76b-253c-474d-8412-5060216ccd97",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1AjDzlgQDBIiqWonR8Q89E2co8v07MleUHZJyl9TYlrI",
+          "mode": "list",
+          "cachedResultName": "n8n Test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AjDzlgQDBIiqWonR8Q89E2co8v07MleUHZJyl9TYlrI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AjDzlgQDBIiqWonR8Q89E2co8v07MleUHZJyl9TYlrI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "requestType",
+              "displayName": "requestType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "handler",
+              "displayName": "handler",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1552,
+        384
+      ],
+      "id": "81a59033-9dd3-49fc-b9ce-cc08ba1d04e1",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iQVHt4ZFtp0L41QR",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7eebd610-64ba-4c15-918d-e4745a36e51b",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "id": "acf64c99-7c19-46e3-83fe-5bea94fc63b3",
+              "name": "message",
+              "value": "Email request processing failed",
+              "type": "string"
+            },
+            {
+              "id": "13643274-993a-4663-9109-8bc6296a12f0",
+              "name": "handler",
+              "value": "email",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1104,
+        96
+      ],
+      "id": "f581f526-b305-4ed6-a67d-6d084b92d53d",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1328,
+        0
+      ],
+      "id": "6de7d995-da1d-4169-9d54-e30f569edbdb",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $('Webhook').first().json.body || {};\nconst error = $json;\n\nreturn [\n  {\n    json: {\n      requestId: $('Generate Request ID').first().json.requestId || '',\n      timestamp: new Date().toLocaleString('en-GB', {\n        day: '2-digit',\n        month: '2-digit',\n        year: 'numeric',\n        hour: '2-digit',\n        minute: '2-digit',\n        second: '2-digit',\n        hour12: false\n      }),\n      requestType: body.requestType || '',\n      name: body.name || '',\n      email: body.email || '',\n      status: error.status || 'error',\n      handler: error.handler || 'email',\n      message: error.message || 'Email request processing failed'\n    }\n  }\n];;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        192
+      ],
+      "id": "d27bcc56-1935-48bc-be27-077a7a235242",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7eebd610-64ba-4c15-918d-e4745a36e51b",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "id": "acf64c99-7c19-46e3-83fe-5bea94fc63b3",
+              "name": "message",
+              "value": "Data request processing failed",
+              "type": "string"
+            },
+            {
+              "id": "13643274-993a-4663-9109-8bc6296a12f0",
+              "name": "handler",
+              "value": "data",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1104,
+        480
+      ],
+      "id": "3035fd8a-91a1-4ba3-bca6-ef792fc69722",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1328,
+        384
+      ],
+      "id": "0e72f536-2082-46ec-916b-df41643f02ea",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $('Webhook').first().json.body || {};\nconst error = $json;\n\nreturn [\n  {\n    json: {\n      requestId: $('Generate Request ID').first().json.requestId || '',\n      timestamp: new Date().toLocaleString('en-GB', {\n        day: '2-digit',\n        month: '2-digit',\n        year: 'numeric',\n        hour: '2-digit',\n        minute: '2-digit',\n        second: '2-digit',\n        hour12: false\n      }),\n      requestType: body.requestType || '',\n      name: body.name || '',\n      email: body.email || '',\n      status: error.status || 'error',\n      handler: error.handler || 'data',\n      message: error.message || 'Data request processing failed'\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        576
+      ],
+      "id": "c903dea7-80ac-420e-921e-487f6dcd59a7",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7eebd610-64ba-4c15-918d-e4745a36e51b",
+              "name": "status",
+              "value": "error",
+              "type": "string"
+            },
+            {
+              "id": "acf64c99-7c19-46e3-83fe-5bea94fc63b3",
+              "name": "message",
+              "value": "Notification request processing failed",
+              "type": "string"
+            },
+            {
+              "id": "13643274-993a-4663-9109-8bc6296a12f0",
+              "name": "handler",
+              "value": "Notification",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1104,
+        864
+      ],
+      "id": "cea9ebf2-bc17-4a9f-942c-d1c1e94bd502",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1328,
+        768
+      ],
+      "id": "eddd1057-5c89-4cd8-829c-87ff9ec9e2db",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $('Webhook').first().json.body || {};\nconst error = $json;\n\nreturn [\n  {\n    json: {\n      requestId: $('Generate Request ID').first().json.requestId || '',\n      timestamp: new Date().toLocaleString('en-GB', {\n        day: '2-digit',\n        month: '2-digit',\n        year: 'numeric',\n        hour: '2-digit',\n        minute: '2-digit',\n        second: '2-digit',\n        hour12: false\n      }),\n      requestType: body.requestType || '',\n      name: body.name || '',\n      email: body.email || '',\n      status: error.status || 'error',\n      handler: error.handler || 'notification',\n      message: error.message || 'Notification request processing failed'\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        960
+      ],
+      "id": "98a9e744-1aed-4efa-bce4-6f8382d26984",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const requestId = `REQ-${Date.now()}-${Math.random()\n  .toString(36)\n  .substring(2, 8)\n  .toUpperCase()}`;\n\nreturn [\n  {\n    json: {\n      ...$json,\n      requestId\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        480
+      ],
+      "id": "aef4a63b-3de4-4e7d-8848-610175364490",
+      "name": "Generate Request ID"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate Request ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Call 'GW - Email Handler'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'GW - Data Handler'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'GW - Notification Handler'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Request Type validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'GW - Email Handler'": {
+      "main": [
+        [
+          {
+            "node": "Sub workflow Merge",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'GW - Data Handler'": {
+      "main": [
+        [
+          {
+            "node": "Sub workflow Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'GW - Notification Handler'": {
+      "main": [
+        [
+          {
+            "node": "Sub workflow Merge",
+            "type": "main",
+            "index": 2
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Request Type validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sub workflow Merge": {
+      "main": [
+        [
+          {
+            "node": "Request Type validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Request Type validation": {
+      "main": [
+        [
+          {
+            "node": "IF API Key",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF API Key": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Request ID": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "pd39PzGo6a7Jid3i",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "dc01c5e7-4c30-4ae7-b182-f6f9476c1803",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9a28dede2f1a3ac6e519efc3120cdbc0110c71019a493eebd98b67d6eacecfea"
+  },
+  "nodeGroups": [],
+  "id": "4ssePtgyoBMT3iI8",
+  "tags": []
+}

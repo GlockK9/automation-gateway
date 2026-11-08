@@ -1,0 +1,150 @@
+{
+  "name": "GW - Email Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "requestType"
+            },
+            {
+              "name": "name "
+            },
+            {
+              "name": "email "
+            },
+            {
+              "name": "message "
+            },
+            {
+              "name": "request Id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "242841b7-cd23-42e9-84d4-64f490337aa6",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "305d77a2-1546-45c5-b012-3047cce06f7e",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "433e2621-4052-40c9-ad0f-759f6361965c",
+              "name": "handler",
+              "value": "email",
+              "type": "string"
+            },
+            {
+              "id": "bf949a21-7d40-4a3f-9a63-559540c06de7",
+              "name": "message",
+              "value": "Email request processed",
+              "type": "string"
+            },
+            {
+              "id": "370fe04c-9401-42cd-ba42-9a00d3cab096",
+              "name": "timestamp",
+              "value": "={{$now.format('yyyy-MM-dd')}}",
+              "type": "string"
+            },
+            {
+              "id": "b46d5215-8e47-43e4-b8e8-d879dbfcde4d",
+              "name": "requestType",
+              "value": "={{ $json.requestType }}",
+              "type": "string"
+            },
+            {
+              "id": "8568b1b5-8772-4a6c-b04a-c1f7f39d4e1d",
+              "name": "name",
+              "value": "={{ $json['name '] }}",
+              "type": "string"
+            },
+            {
+              "id": "a102a0b9-1fc5-4dd3-a7bf-7582066ebd40",
+              "name": "email",
+              "value": "={{ $json['email '] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        464,
+        0
+      ],
+      "id": "1ef599b3-c88c-4868-b556-9ea7ed09b321",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "throw new Error(\"TEST: Email Handler failure\");"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "cf0d55d9-7e26-41c7-8c08-f8ec446c5400",
+      "name": "Code in JavaScript",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "pd39PzGo6a7Jid3i",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "9e859740-d244-4241-a66b-3fa48a4213fb",
+  "meta": {
+    "instanceId": "9a28dede2f1a3ac6e519efc3120cdbc0110c71019a493eebd98b67d6eacecfea"
+  },
+  "nodeGroups": [],
+  "id": "DEH64UIY6OayVQHV",
+  "tags": []
+}

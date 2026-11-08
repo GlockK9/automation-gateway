@@ -1,0 +1,147 @@
+{
+  "name": "GW - Data Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "requestType"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "email"
+            },
+            {
+              "name": "message"
+            },
+            {
+              "name": "requestId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b931b936-42f9-4fb3-a5e1-8e4fbc8c7932",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f3c8f76d-7d95-4885-adfe-5dc934280610",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "bc3f5176-0e6f-495d-9105-1c8eff138966",
+              "name": "handler",
+              "value": "data",
+              "type": "string"
+            },
+            {
+              "id": "981733c9-5f14-469a-915d-34927bed1d64",
+              "name": "success",
+              "value": "Data request processed",
+              "type": "string"
+            },
+            {
+              "id": "7dbe4d9b-d3e3-42c5-9ac6-caa72d153e8d",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "92888498-56d6-43cb-bbed-75bf36d7a484",
+              "name": "timestamp",
+              "value": "={{$now.format('yyyy-MM-dd')}}",
+              "type": "string"
+            },
+            {
+              "id": "dc59cf81-dbd5-480f-90e2-5b07432fc3ec",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "7a0d9a98-4d12-47af-b9aa-9176e6470bb5",
+              "name": "requestType",
+              "value": "={{ $json.requestType }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "bfd97ff2-a24f-4eb6-9ff2-0de04b9dae16",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "throw new Error(\"TEST: Data Handler failure\");"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "6375f099-1fdf-4e1a-a18e-1e62c4a20462",
+      "name": "Code in JavaScript",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "fed33635-7c28-473a-8f49-3b44dda7ddbb",
+  "meta": {
+    "instanceId": "9a28dede2f1a3ac6e519efc3120cdbc0110c71019a493eebd98b67d6eacecfea"
+  },
+  "nodeGroups": [],
+  "id": "AvkoArUMYOHjIhrO",
+  "tags": []
+}

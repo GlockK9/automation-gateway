@@ -1,0 +1,122 @@
+{
+  "name": "GW - Notification Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "requestType"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "email"
+            },
+            {
+              "name": "message"
+            },
+            {
+              "name": "requestId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f8a7c6ca-ffb1-421e-a836-92affdbcaefb",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "765e2a9e-240c-4f72-a756-e628bd4fae81",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "6db27dba-3211-40fb-8e0d-954c84e4e61b",
+              "name": "handler",
+              "value": "notification",
+              "type": "string"
+            },
+            {
+              "id": "30843c24-686c-4b27-a6da-b11305ad24f4",
+              "name": "message",
+              "value": "Notification request processed",
+              "type": "string"
+            },
+            {
+              "id": "43559608-b5b5-46b2-b9e0-54791b06221d",
+              "name": "timestamp",
+              "value": "={{$now.format('yyyy-MM-dd')}}",
+              "type": "string"
+            },
+            {
+              "id": "c5799a40-ec33-40f1-9b23-f46340c74453",
+              "name": "requestType",
+              "value": "={{ $json.requestType }}",
+              "type": "string"
+            },
+            {
+              "id": "260d51d5-d98c-44bc-a1cb-f758bde310cc",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "a0b3fc3b-aafb-45fa-b808-5d3b750cb86f",
+              "name": "name",
+              "value": "={{$json.name}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e8fd6a61-36ad-421f-8ec1-b618a650e8ad",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e1fc47e8-5588-45e3-a1ba-f534691c6374",
+  "meta": {
+    "instanceId": "9a28dede2f1a3ac6e519efc3120cdbc0110c71019a493eebd98b67d6eacecfea"
+  },
+  "nodeGroups": [],
+  "id": "OfjDQEfBaO4AEJUk",
+  "tags": []
+}
