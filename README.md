@@ -49,3 +49,6 @@ The Automation Gateway provides a structured way to handle different request typ
 ## Project Purpose
 
 Built to demonstrate modular workflow design, request routing, validation, and centralized automation management using n8n.
+<img width="991" height="631" alt="Screenshot 4" src="https://github.com/user-attachments/assets/a0ce1618-e3a1-4cb2-9402-e9ad03f74316" />
+<img width="537" height="278" alt="Screenshot 9" src="https://github.com/user-attachments/assets/ce849bb9-588f-4563-9244-78aca721c2b2" />
+<img width="995" height="148" alt="Screenshot 10" src="https://github.com/user-attachments/assets/7ffa79b4-ea53-48c8-896e-5166e46c5f1d" />
