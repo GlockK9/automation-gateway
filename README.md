@@ -52,6 +52,6 @@ Built to demonstrate modular workflow design, request routing, validation, and c
 <img width="991" height="631" alt="Screenshot 4" src="https://github.com/user-attachments/assets/a0ce1618-e3a1-4cb2-9402-e9ad03f74316" />
 <img width="1205" height="937" alt="Screenshot 11" src="https://github.com/user-attachments/assets/689f4875-a1f6-4654-9ee4-7c09065640d4" />
 <img width="1318" height="306" alt="Screenshot 12" src="https://github.com/user-attachments/assets/3e594ac2-8355-40a9-b8e7-196072b6adf0" />
-<img width="995" height="148" alt="Screenshot 10" src="https://github.com/user-attachments/assets/39a59624-c9de-40b3-80d1-a53798c375aa" />
+
 
 
